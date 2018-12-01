@@ -1,7 +1,6 @@
-﻿using System;
+﻿using MoreLinq;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Solvers
 {
@@ -17,22 +16,13 @@ namespace Solvers
 
         public static int Part2Solver(string[] input)
         {
-            var numbers = input
-                           .Select(int.Parse)
-                           .ToArray();
             var seen = new HashSet<int>() { 0 };
-            var total = 0;
-            var pos = 0;
-            while(true)
-            {
-                var number = numbers[pos++];
-                if (pos == numbers.Length) pos = 0;
-                total += number;
-                if (seen.Contains(total))
-                    return total;
-                seen.Add(total);
-            }
-            throw new InvalidOperationException("Didn't see any duplicates");
+            return input
+                .Select(int.Parse)
+                .Repeat()
+                .Scan((a, b) => a + b)
+                .Where(n => !seen.Add(n))
+                .First();
         }
     }
 }
