@@ -7,21 +7,17 @@ namespace Solvers
 {
     public class Day1
     {
-        public static int Part1Solver(string input)
+        public static int Part1Solver(string[] input)
         {
-            var total = 
-                Regex.Split(input, "\r\n|\n")
-                            .Where(s => !String.IsNullOrEmpty(s))
+            var total = input 
                            .Select(int.Parse)
                            .Sum();
             return total;
         }
 
-        public static int Part2Solver(string input)
+        public static int Part2Solver(string[] input)
         {
-            var numbers =
-                Regex.Split(input, "\r\n|\n")
-                            .Where(s => !String.IsNullOrEmpty(s))
+            var numbers = input
                            .Select(int.Parse)
                            .ToArray();
             var seen = new HashSet<int>() { 0 };
