@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvers", "Solvers\Solvers.csproj", "{51A3F220-9572-4C39-83D7-9BBAFA1A4727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solvers", "Solvers\Solvers.csproj", "{51A3F220-9572-4C39-83D7-9BBAFA1A4727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3655BAB4-A834-4222-8E39-4D5A6690D508}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
