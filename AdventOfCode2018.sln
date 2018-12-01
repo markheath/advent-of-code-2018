@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvers", "Solvers\Solvers.csproj", "{51A3F220-9572-4C39-83D7-9BBAFA1A4727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C24CD57-7437-4B5E-99BC-4BF58B031B8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A3F220-9572-4C39-83D7-9BBAFA1A4727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A3F220-9572-4C39-83D7-9BBAFA1A4727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A3F220-9572-4C39-83D7-9BBAFA1A4727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A3F220-9572-4C39-83D7-9BBAFA1A4727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0ACFAB-187A-4BF9-8F0B-4C8D8C3EE15E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25FC7509-EB3B-4BEA-B71C-59DA408070BA}
+	EndGlobalSection
+EndGlobal
