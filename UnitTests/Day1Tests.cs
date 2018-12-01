@@ -34,5 +34,19 @@ namespace Tests
             var total = Day1.Part1Solver(GetInputFile());
             Assert.AreEqual(445, total);
         }
+
+        [Test]
+        public void SeenTwice()
+        {
+            var answer = Day1.Part2Solver("+7\r\n+7\r\n-2\r\n-7\r\n-4");
+            Assert.AreEqual(14, answer);
+        }
+
+        [Test]
+        public void Part2Solution()
+        {
+            var answer = Day1.Part2Solver(GetInputFile());
+            Assert.AreEqual(219, answer);
+        }
     }
 }
