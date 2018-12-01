@@ -6,11 +6,14 @@ namespace Tests
 
     public class Day1Tests
     {
-        [Test]
-        public void BasicAdding()
+        [TestCase("+1, -2, +3, +1", 3)]
+        [TestCase("+1, +1, +1", 3)]
+        [TestCase("+1, +1, -2", 0)]
+        [TestCase("-1, -2, -3", -6)]
+        public void BasicAdding(string input, int expected)
         {
-            var total = Day1.Part1Solver("+5,-2,+4".Split(','));
-            Assert.AreEqual(7, total);
+            var total = Day1.Part1Solver(input.Split(", "));
+            Assert.AreEqual(expected, total);
         }
 
         [Test]
@@ -20,11 +23,15 @@ namespace Tests
             Assert.AreEqual(445, total);
         }
 
-        [Test]
-        public void SeenTwice()
+        [TestCase("+1, -2, +3, +1", 2)]
+        [TestCase("+1, -1", 0)]
+        [TestCase("+3, +3, +4, -2, -4", 10)]
+        [TestCase("-6, +3, +8, +5, -6", 5)]
+        [TestCase("+7, +7, -2, -7, -4", 14)]
+        public void SeenTwice(string input, int expected)
         {
-            var answer = Day1.Part2Solver("+7,+7,-2,-7,-4".Split(','));
-            Assert.AreEqual(14, answer);
+            var answer = Day1.Part2Solver(input.Split(','));
+            Assert.AreEqual(expected, answer);
         }
 
         [Test]
