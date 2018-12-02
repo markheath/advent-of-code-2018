@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Solvers
 {
@@ -13,9 +14,22 @@ namespace Solvers
                 * input.Count(s => HasAGroupOf(s, 3));
         }
 
-        public static int Part2Solver(string[] input)
+        public static string Part2Solver(string[] input)
         {
-            throw new NotImplementedException();
+            return input.Subsets(2)
+                .Select(s => OneCharDifferent(s[0], s[1]))
+                .First(s => s != null);
+        }
+
+        public static string OneCharDifferent(string s, string s2)
+        {
+            var res = new StringBuilder();
+            for(int n = 0; n < s.Length; n++)
+            {
+                if (s[n] == s2[n])
+                    res.Append(s[n]);
+            }
+            return res.Length == s.Length - 1 ? res.ToString() : null;
         }
 
         public static bool HasAGroupOf(string s, int count)

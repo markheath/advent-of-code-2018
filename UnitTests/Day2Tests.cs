@@ -21,5 +21,18 @@ namespace Tests
             Assert.AreEqual(12, checksum);
         }
 
+        [Test]
+        public void Part2TestData()
+        {
+            var lettersInCommon = Day2.Part2Solver("abcde,fghij,klmno,pqrst,fguij,axcye,wvxyz".Split(','));
+            Assert.AreEqual("fgij", lettersInCommon);
+        }
+
+        [Test]
+        public void Part2Solution()
+        {
+            var lettersInCommon = Day2.Part2Solver(Helpers.GetInputLines(2));
+            Assert.AreEqual("mkcdflathzwsvjxrevymbdpoq", lettersInCommon);
+        }
     }
 }
