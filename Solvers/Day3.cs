@@ -35,5 +35,40 @@ namespace Solvers
                     if (state[x,y] > 1) overlaps++;
             return overlaps;
         }
+
+        public static int Part2Solver(string[] input)
+        {
+            var state = new int[1000, 1000];
+            var free = Enumerable.Range(1, input.Length).ToHashSet();
+            var regex = new Regex(@"\#(\d+) \@ (\d+),(\d+)\: (\d+)x(\d+)");
+            var shapes = input.Select(s => regex.Match(s).Groups)
+                 .Select(g => new
+                 {
+                     n = int.Parse(g[1].Value),
+                     x = int.Parse(g[2].Value),
+                     y = int.Parse(g[3].Value),
+                     w = int.Parse(g[4].Value),
+                     h = int.Parse(g[5].Value)
+                 });
+            foreach (var shape in shapes)
+            {
+                for (var x = shape.x; x < shape.x + shape.w; x++)
+                    for (var y = shape.y; y < shape.y + shape.h; y++)
+                    {
+                        if (state[x,y] == 0)
+                        {
+                            state[x, y] = shape.n;
+                        }
+                        else
+                        {
+                            free.Remove(shape.n);
+                            free.Remove(state[x, y]);
+                            state[x, y] = shape.n;
+                        }
+                    }
+            }
+
+            return free.Single();
+        }
     }
 }

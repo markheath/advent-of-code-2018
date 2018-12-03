@@ -21,6 +21,18 @@ namespace Tests
             Assert.AreEqual(4, overlaps);
         }
 
+        [Test]
+        public void Part2Solution()
+        {
+            var claimId = Day3.Part2Solver(Helpers.GetInputLines(3));
+            Assert.AreEqual(275, claimId);
+        }
 
+        [Test]
+        public void Part2TestData()
+        {
+            var claimId = Day3.Part2Solver("#1 @ 1,3: 4x4;#2 @ 3,1: 4x4;#3 @ 5,5: 2x2".Split(';'));
+            Assert.AreEqual(3, claimId);
+        }
     }
 }
