@@ -19,7 +19,7 @@ namespace Solvers
             var seen = new HashSet<int> { 0 };
             return input
                 .Select(int.Parse)
-                .Repeat()
+                .Repeat() // perhaps should set a max here
                 .Scan((a, b) => a + b)
                 .First(n => !seen.Add(n));
         }
