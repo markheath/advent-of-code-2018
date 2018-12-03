@@ -1,12 +1,10 @@
 ﻿using MoreLinq;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Solvers
 {
-    public class Day2
+    public static class Day2
     {
         public static int Part1Solver(string[] input)
         {
@@ -21,7 +19,7 @@ namespace Solvers
                 .First(s => s != null);
         }
 
-        public static string OneCharDifferent(string s, string s2)
+        private static string OneCharDifferent(string s, string s2)
         {
             var res = new StringBuilder();
             for(int n = 0; n < s.Length; n++)
@@ -32,7 +30,7 @@ namespace Solvers
             return res.Length == s.Length - 1 ? res.ToString() : null;
         }
 
-        public static bool HasAGroupOf(string s, int count)
+        private static bool HasAGroupOf(string s, int count)
         {
             return s.CountBy(c => c).Any(n => n.Value == count);
         }

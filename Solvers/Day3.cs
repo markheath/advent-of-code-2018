@@ -1,27 +1,16 @@
 ﻿using MoreLinq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Solvers
 {
-    public class Day3
+    public static class Day3
     {
         public static int Part1Solver(string[] input)
         {
             var state = new int[1000, 1000];
-            var regex = new Regex(@"\#(\d+) \@ (\d+),(\d+)\: (\d+)x(\d+)");
-            var shapes = input.Select(s => regex.Match(s).Groups)
-                 .Select(g => new
-                 {
-                     n = int.Parse(g[1].Value),
-                     x = int.Parse(g[2].Value),
-                     y = int.Parse(g[3].Value),
-                     w = int.Parse(g[4].Value),
-                     h = int.Parse(g[5].Value)
-                 });
+            var shapes = ParseInput(input);
             foreach(var shape in shapes)
             {
                 for (var x = shape.x; x < shape.x + shape.w; x++)
@@ -40,16 +29,7 @@ namespace Solvers
         {
             var state = new int[1000, 1000];
             var free = Enumerable.Range(1, input.Length).ToHashSet();
-            var regex = new Regex(@"\#(\d+) \@ (\d+),(\d+)\: (\d+)x(\d+)");
-            var shapes = input.Select(s => regex.Match(s).Groups)
-                 .Select(g => new
-                 {
-                     n = int.Parse(g[1].Value),
-                     x = int.Parse(g[2].Value),
-                     y = int.Parse(g[3].Value),
-                     w = int.Parse(g[4].Value),
-                     h = int.Parse(g[5].Value)
-                 });
+            var shapes = ParseInput(input);
             foreach (var shape in shapes)
             {
                 for (var x = shape.x; x < shape.x + shape.w; x++)
@@ -69,6 +49,17 @@ namespace Solvers
             }
 
             return free.Single();
+        }
+
+        private static IEnumerable<(int n, int x, int y, int w, int h)> ParseInput(string[] input)
+        {
+            var regex = new Regex(@"\#(\d+) \@ (\d+),(\d+)\: (\d+)x(\d+)");
+            return input.Select(s => regex.Match(s).Groups)
+                .Select(g => (int.Parse(g[1].Value),
+                    int.Parse(g[2].Value),
+                    int.Parse(g[3].Value),
+                    int.Parse(g[4].Value),
+                    int.Parse(g[5].Value)));
         }
     }
 }

@@ -3,7 +3,6 @@ using Solvers;
 
 namespace Tests
 {
-
     public class Day1Tests
     {
         [TestCase("+1, -2, +3, +1", 3)]
