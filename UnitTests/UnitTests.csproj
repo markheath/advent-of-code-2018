@@ -4,18 +4,22 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="day1.txt" />
     <None Remove="day2.txt" />
     <None Remove="day3.txt" />
+    <None Remove="day4.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="day1.txt" />
     <EmbeddedResource Include="day2.txt" />
     <EmbeddedResource Include="day3.txt" />
+    <EmbeddedResource Include="day4.txt" />
   </ItemGroup>
 
   <ItemGroup>
