@@ -15,13 +15,17 @@ namespace Solvers
             return output.Length;
         }
 
-        private static string React(string input)
+        private static string React(string input, char ignore = '*')
         {
             var sb = new StringBuilder();
             var diff = Math.Abs('A' - 'a');
             for(int n = 0; n < input.Length; n++)
             {
-                if(sb.Length == 0)
+                if (char.ToLower(input[n]) == ignore)
+                {
+                    // skip
+                }
+                else if (sb.Length == 0)
                 {
                     sb.Append(input[n]);
                 }
@@ -40,7 +44,9 @@ namespace Solvers
 
         public static int Part2Solver(string[] input)
         {
-            throw new NotImplementedException();
+            return Enumerable.Range('a', 26)
+                .Select(c => React(input[0], (char)c).Length)
+                .Min();
         }
 
 

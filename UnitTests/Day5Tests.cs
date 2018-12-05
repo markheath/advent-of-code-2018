@@ -21,7 +21,19 @@ namespace Tests
             Assert.AreEqual(9238, polymerLength);
         }
 
-        
+        [Test]
+        public void Part2TestData()
+        {
+            var polymerLength = Day5.Part2Solver(testData.Split('\n'));
+            Assert.AreEqual(4, polymerLength);
+        }
+
+        [Test]
+        public void Part2Solution()
+        {
+            var polymerLength = Day5.Part2Solver(Helpers.GetInputLines(5));
+            Assert.AreEqual(4052, polymerLength);
+        }
     }
 
 }
