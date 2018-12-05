@@ -1,9 +1,6 @@
-﻿using MoreLinq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Solvers
 {
@@ -19,23 +16,15 @@ namespace Solvers
         {
             var sb = new StringBuilder();
             var diff = Math.Abs('A' - 'a');
-            for(int n = 0; n < input.Length; n++)
+            foreach (var c in input.Where(x => char.ToLower(x) != ignore))
             {
-                if (char.ToLower(input[n]) == ignore)
-                {
-                    // skip
-                }
-                else if (sb.Length == 0)
-                {
-                    sb.Append(input[n]);
-                }
-                else if(Math.Abs(sb[sb.Length-1] - input[n]) == diff)
+                if(sb.Length > 0 && Math.Abs(sb[sb.Length-1] - c) == diff)
                 {
                     sb.Length--;
                 }
                 else
                 {
-                    sb.Append(input[n]);
+                    sb.Append(c);
                 }
             }
             return sb.ToString();
