@@ -54,6 +54,11 @@ namespace Solvers
             return new Neighbour() { Point = -1, Distance = nearest[0].Distance };
         }
 
+        static int FindDistanceToAll(int x, int y, (int, int)[] coords)
+        {
+            return coords.Sum(c => Math.Abs(x - c.Item1) + Math.Abs(y - c.Item2));
+          }
+
         [DebuggerDisplay("{Point}:{Distance}")]
         struct Neighbour
         {
@@ -65,9 +70,28 @@ namespace Solvers
             }
         }
 
-        public static int Part2Solver(string[] input)
+        public static int Part2Solver(string[] input, int maxDist)
         {
-            throw new NotImplementedException();
+
+            var coords = input.Select(x => x.Split(','))
+                .Select(c => (x: int.Parse(c[0]), y: int.Parse(c[1])))
+                .ToArray();
+            var minX = coords.Min(c => c.x);
+            var maxX = coords.Max(c => c.x);
+            var minY = coords.Min(c => c.y);
+            var maxY = coords.Max(c => c.y);
+
+            var grid = new Dictionary<(int, int), int>();
+            for (var x = minX; x <= maxX; x++)
+            {
+                for (var y = minY; y <= maxY; y++)
+                {
+                    grid[(x, y)] = FindDistanceToAll(x, y, coords);
+                }
+            }
+
+            return grid.Values
+                .Count(n => n < maxDist);
         }
     }
 }

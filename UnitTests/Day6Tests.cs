@@ -26,7 +26,19 @@ namespace Tests
             Assert.AreEqual(3907, result);
         }
 
+        [Test]
+        public void Part2TestData()
+        {
+            var result = Day6.Part2Solver(testData.Split("\r\n"), 32);
+            Assert.AreEqual(16, result);
+        }
 
+        [Test]
+        public void Part2Solution()
+        {
+            var result = Day6.Part2Solver(Helpers.GetInputLines(6), 10000);
+            Assert.AreEqual(42036, result);
+        }
     }
 
 }
