@@ -23,10 +23,22 @@ Step F must be finished before step E can begin.";
         public void Part1Solution()
         {
             var result = Day7.Part1Solver(Helpers.GetInputLines(7));
-            // not 8170 (too high)
-            Assert.AreEqual(3907, result);
+            Assert.AreEqual("EBICGKQOVMYZJAWRDPXFSUTNLH", result);
         }
 
+        [Test]
+        public void Part7TestData()
+        {
+            var result = Day7.Part2Solver(testData.Split("\r\n"));
+            Assert.AreEqual(16, result);
+        }
+
+        [Test]
+        public void Part7Solution()
+        {
+            var result = Day7.Part2Solver(Helpers.GetInputLines(7));
+            Assert.AreEqual(42036, result);
+        }
     }
 
 }
