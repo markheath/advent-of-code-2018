@@ -24,31 +24,24 @@ namespace Solvers
             }
         }
 
-        private static Node ParseTree(Func<int> getNextNumber, Node parent)
+        private static Node ParseTree(Func<int> getNextNumber)
         {
             var newNode = new Node();
             var childNodeCount = getNextNumber();
             var metaDataCount = getNextNumber();
-            if (parent != null)
-            {
-                parent.ChildNodes.Add(newNode);
-            }
-            for (int child = 0; child < childNodeCount; child++)
-            {
-                ParseTree(getNextNumber, newNode);
-            }
-            for (int meta = 0; meta < metaDataCount; meta++)
-            {
-                newNode.MetaData.Add(getNextNumber());
-            }
+            newNode.ChildNodes.AddRange(
+                Enumerable.Range(0, childNodeCount).Select(_ => ParseTree(getNextNumber)));
+            newNode.MetaData.AddRange(
+                Enumerable.Range(0, metaDataCount).Select(_ => getNextNumber()));
             return newNode;
         }
 
         private static Node ParseTree(string input)
         {
-            var numbers = input.Split(' ').Select(int.Parse).GetEnumerator();
+            var numbers = input.Split(' ').Select(int.Parse)
+                .GetEnumerator();
             return ParseTree(() => {
-                numbers.MoveNext(); return numbers.Current; }, null);
+                numbers.MoveNext(); return numbers.Current; });
 
         }
     
