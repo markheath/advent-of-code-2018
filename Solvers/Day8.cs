@@ -11,8 +11,6 @@ namespace Solvers
         {
             public List<Node> ChildNodes { get; } = new List<Node>();
             public List<int> MetaData { get; } = new List<int>();
-            public int MetaDataCount { get; set; }
-            public int ChildNodeCount { get; set; }
             public int Value
             {
                 get
@@ -30,22 +28,22 @@ namespace Solvers
         {
             var newNode = new Node();
             numbers.MoveNext();
-            newNode.ChildNodeCount = numbers.Current;
+            var childNodeCount = numbers.Current;
             numbers.MoveNext();
-            newNode.MetaDataCount = numbers.Current;
+            var metaDataCount = numbers.Current;
             if (parent != null)
             {
                 parent.ChildNodes.Add(newNode);
             }
             yield return newNode;
-            for(int child = 0; child < newNode.ChildNodeCount; child++)
+            for(int child = 0; child < childNodeCount; child++)
             {
                 foreach (var children in ParseTree(numbers, newNode))
                 {
                     yield return children;
                 }
             }
-            for (int meta = 0; meta < newNode.MetaDataCount; meta++)
+            for (int meta = 0; meta < metaDataCount; meta++)
             {
                 numbers.MoveNext();
                 newNode.MetaData.Add(numbers.Current);
