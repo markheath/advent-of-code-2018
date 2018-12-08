@@ -7,7 +7,7 @@ namespace Solvers
 {
     public static class Day8
     {
-        public class Node
+        private class Node
         {
             public List<Node> ChildNodes { get; } = new List<Node>();
             public List<int> MetaData { get; } = new List<int>();
@@ -24,41 +24,43 @@ namespace Solvers
             }
         }
 
-        public static Node ParseTree(IEnumerator<int> numbers, Node parent)
+        private static Node ParseTree(Func<int> getNextNumber, Node parent)
         {
             var newNode = new Node();
-            numbers.MoveNext();
-            var childNodeCount = numbers.Current;
-            numbers.MoveNext();
-            var metaDataCount = numbers.Current;
+            var childNodeCount = getNextNumber();
+            var metaDataCount = getNextNumber();
             if (parent != null)
             {
                 parent.ChildNodes.Add(newNode);
             }
-            for(int child = 0; child < childNodeCount; child++)
+            for (int child = 0; child < childNodeCount; child++)
             {
-                ParseTree(numbers, newNode);
+                ParseTree(getNextNumber, newNode);
             }
             for (int meta = 0; meta < metaDataCount; meta++)
             {
-                numbers.MoveNext();
-                newNode.MetaData.Add(numbers.Current);
+                newNode.MetaData.Add(getNextNumber());
             }
             return newNode;
         }
 
+        private static Node ParseTree(string input)
+        {
+            var numbers = input.Split(' ').Select(int.Parse).GetEnumerator();
+            return ParseTree(() => {
+                numbers.MoveNext(); return numbers.Current; }, null);
+
+        }
+    
         public static int Part1Solver(string[] input)
         {
-            var numbers = input[0].Split(' ').Select(int.Parse).GetEnumerator();
-            var rootNode = ParseTree(numbers, null);
+            var rootNode = ParseTree(input[0]);
             return MoreEnumerable.TraverseDepthFirst(rootNode, n => n.ChildNodes).Sum(n => n.MetaData.Sum());
         }
 
-
         public static int Part2Solver(string[] input)
         {
-            var numbers = input[0].Split(' ').Select(int.Parse).GetEnumerator();
-            var rootNode = ParseTree(numbers, null);
+            var rootNode = ParseTree(input[0]);
             return rootNode.Value;
         }
     }
