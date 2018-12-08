@@ -24,7 +24,7 @@ namespace Solvers
             }
         }
 
-        public static IEnumerable<Node> ParseTree(IEnumerator<int> numbers, Node parent)
+        public static Node ParseTree(IEnumerator<int> numbers, Node parent)
         {
             var newNode = new Node();
             numbers.MoveNext();
@@ -35,35 +35,31 @@ namespace Solvers
             {
                 parent.ChildNodes.Add(newNode);
             }
-            yield return newNode;
             for(int child = 0; child < childNodeCount; child++)
             {
-                foreach (var children in ParseTree(numbers, newNode))
-                {
-                    yield return children;
-                }
+                ParseTree(numbers, newNode);
             }
             for (int meta = 0; meta < metaDataCount; meta++)
             {
                 numbers.MoveNext();
                 newNode.MetaData.Add(numbers.Current);
             }
-
+            return newNode;
         }
 
         public static int Part1Solver(string[] input)
         {
             var numbers = input[0].Split(' ').Select(int.Parse).GetEnumerator();
-            var nodes = ParseTree(numbers, null).ToList();
-            return nodes.Sum(n => n.MetaData.Sum());
+            var rootNode = ParseTree(numbers, null);
+            return MoreEnumerable.TraverseDepthFirst(rootNode, n => n.ChildNodes).Sum(n => n.MetaData.Sum());
         }
 
 
         public static int Part2Solver(string[] input)
         {
             var numbers = input[0].Split(' ').Select(int.Parse).GetEnumerator();
-            var nodes = ParseTree(numbers, null).ToList();
-            return nodes[0].Value;
+            var rootNode = ParseTree(numbers, null);
+            return rootNode.Value;
         }
     }
 }
