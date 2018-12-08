@@ -13,6 +13,17 @@ namespace Solvers
             public List<int> MetaData { get; } = new List<int>();
             public int MetaDataCount { get; set; }
             public int ChildNodeCount { get; set; }
+            public int Value
+            {
+                get
+                {
+                    if (ChildNodes.Count == 0)
+                        return MetaData.Sum();
+                    return MetaData
+                        .Where(n => n > 0 && n <= ChildNodes.Count)
+                        .Sum(n => ChildNodes[n - 1].Value);
+                }
+            }
         }
 
         public static IEnumerable<Node> ParseTree(IEnumerator<int> numbers, Node parent)
@@ -52,7 +63,9 @@ namespace Solvers
 
         public static int Part2Solver(string[] input)
         {
-            throw new NotImplementedException();
+            var numbers = input[0].Split(' ').Select(int.Parse).GetEnumerator();
+            var nodes = ParseTree(numbers, null).ToList();
+            return nodes[0].Value;
         }
     }
 }

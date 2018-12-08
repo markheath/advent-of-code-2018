@@ -20,6 +20,18 @@ namespace Tests
             Assert.AreEqual(49426, result);
         }
 
+        [Test]
+        public void Part2TestData()
+        {
+            var result = Day8.Part2Solver(testData.Split("\r\n"));
+            Assert.AreEqual(66, result);
+        }
 
+        [Test]
+        public void Part2Solution()
+        {
+            var result = Day8.Part2Solver(Helpers.GetInputLines(8));
+            Assert.AreEqual(40688, result);
+        }
     }
 }
