@@ -1,7 +1,4 @@
-﻿using MoreLinq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Solvers
@@ -17,9 +14,10 @@ namespace Solvers
         }
 
         // n.b. I'm sure high score can be solved without actually playing the game!
-        public static int PlayGame(int players, int lastMarble)
+        // going the linked list route worked well for part 2
+        public static long PlayGame(int players, int lastMarble)
         {
-            var scores = new int[players];
+            var scores = new long[players];
             var currentBoard = new Position();
             currentBoard.Left = currentBoard;
             currentBoard.Right = currentBoard;
@@ -51,17 +49,22 @@ namespace Solvers
             return scores.Max();
         }
     
-        public static int Part1Solver(string[] input)
+        public static long Part1Solver(string[] input)
         {
-            var matches = Regex.Matches(input[0], @"\d+");
-            var players = int.Parse(matches[0].Value);
-            var lastMarble = int.Parse(matches[1].Value);
+            var (players, lastMarble) = ParseInput(input[0]);
             return PlayGame(players, lastMarble);
         }
 
-        public static int Part2Solver(string[] input)
+        private static (int,int) ParseInput(string input)
         {
-            throw new NotImplementedException();
+            var matches = Regex.Matches(input, @"\d+");
+            return(int.Parse(matches[0].Value),int.Parse(matches[1].Value));
+        }
+
+        public static long Part2Solver(string[] input)
+        {
+            var (players, lastMarble) = ParseInput(input[0]);
+            return PlayGame(players, lastMarble*100);
         }
     }
 }
