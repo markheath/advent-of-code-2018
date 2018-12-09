@@ -30,7 +30,7 @@ namespace Tests
         public void Part2Solution()
         {
             var result = Day9.Part2Solver(Helpers.GetInputLines(9));
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(3352507536, result);
         }
     }
 }
