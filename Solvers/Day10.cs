@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Solvers
@@ -24,11 +25,9 @@ namespace Solvers
                 else
                 {
                     UpdateLights(lights, -1);
-                    RenderLights(lights);
-                    break;
+                    return RenderLights(lights);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public static Light ParseInput(string input)
@@ -47,12 +46,12 @@ namespace Solvers
             }
         }
 
-        public static int MeasureCanvas(Light[] lights)
+        public static long MeasureCanvas(Light[] lights)
         { 
-            var minX = lights.Min(p => p.Position.X);
-            var maxX = lights.Max(p => p.Position.X);
-            var minY = lights.Min(p => p.Position.Y);
-            var maxY = lights.Max(p => p.Position.Y);
+            long minX = lights.Min(p => p.Position.X);
+            long maxX = lights.Max(p => p.Position.X);
+            long minY = lights.Min(p => p.Position.Y);
+            long maxY = lights.Max(p => p.Position.Y);
             return (maxX - minX) * (maxY - minY);
         }
 
@@ -62,8 +61,22 @@ namespace Solvers
             var maxX = lights.Max(p => p.Position.X);
             var minY = lights.Min(p => p.Position.Y);
             var maxY = lights.Max(p => p.Position.Y);
+            var width = maxX - minX + 1;
+            var height = maxY - minY + 1;
+            var rows = Enumerable.Range(1, height).Select(_ => Enumerable.Repeat('.',width).ToArray()).ToArray();
+            foreach (var light in lights)
+            {
+                rows[light.Position.Y - minY][light.Position.X - minX] = '#';
+            }
 
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            foreach (var row in rows)
+            {
+                sb.AppendLine(new string(row));
+                Console.WriteLine(row);
+            }
+
+            return sb.ToString();
         }
 
 
