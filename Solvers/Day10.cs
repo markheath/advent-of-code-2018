@@ -10,13 +10,18 @@ namespace Solvers
     {    
         public static string Part1Solver(string[] input)
         {
+            return FindSmallest(input).Item2;
+        }
+
+        private static (int,string) FindSmallest(string[] input)
+        {
             var lights = input.Select(ParseInput).ToArray();
             var previousSize = MeasureCanvas(lights);
-            int iteratons = 0;
+            int seconds = 0;
             while (true)
             {
                 UpdateLights(lights);
-                iteratons++;
+                seconds++;
                 var size = MeasureCanvas(lights);
                 if (size < previousSize)
                 {
@@ -25,10 +30,17 @@ namespace Solvers
                 else
                 {
                     UpdateLights(lights, -1);
-                    return RenderLights(lights);
+                    return (seconds-1, RenderLights(lights));
                 }
             }
         }
+
+        public static int Part2Solver(string[] input)
+        {
+            return FindSmallest(input).Item1;
+        }
+
+
 
         public static Light ParseInput(string input)
         {
@@ -80,10 +92,7 @@ namespace Solvers
         }
 
 
-        public static long Part2Solver(string[] input)
-        {
-            throw new InvalidOperationException();
-        }
+
 
         public class Light
         {

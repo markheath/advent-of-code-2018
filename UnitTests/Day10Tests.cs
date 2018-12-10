@@ -76,7 +76,23 @@ position=<-3,  6> velocity=< 2, -1>";
 #...#...#.
 #...#...#.
 #...#...#.
-#...#..###", result);
+#...#..###
+", result);
+        }
+
+        [Test]
+        public void Part2TestData()
+        {
+            var result = Day10.Part2Solver(testData.Split("\r\n"));
+            Assert.AreEqual(3, result);
+        }
+
+
+        [Test]
+        public void Part2Solution()
+        {
+            var result = Day10.Part2Solver(Helpers.GetInputLines(10));
+            Assert.AreEqual(10011, result);
         }
 
     }
