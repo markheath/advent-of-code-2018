@@ -31,12 +31,18 @@ namespace Tests
             Assert.AreEqual(expected, coords);
         }
 
-
+        [TestCase(18, 113, "90,269,16")]
+        [TestCase(42, 119, "232,251,12")]
+        public void Part2TestData(int gridSerialNumber, int power, string expected)
+        {
+            var coords = Day11.Part2Solver(new[] { gridSerialNumber.ToString() });
+            Assert.AreEqual(expected, coords);
+        }
         [Test]
         public void Part2Solution()
         {
-            var result = Day11.Part2Solver(Helpers.GetInputLines(11));
-            Assert.AreEqual(0, result);
+            var result = Day11.Part2Solver(new[] { "6042" });
+            Assert.AreEqual("232,251,12", result);
         }
 
     }

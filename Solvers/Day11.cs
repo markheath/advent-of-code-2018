@@ -10,22 +10,21 @@ namespace Solvers
         {
             var serialNumber = int.Parse(input[0]);
             var grid = CreateGrid(300, 300, serialNumber);
-            var (x,y) = FindLargestSubgrid(grid, 300, 300);
+            var (x,y,_,_) = FindLargestSubgrid(grid, 3, 300, 300);
             return $"{x},{y}";
         }
 
-        public static (int,int) FindLargestSubgrid(int[,] grid, int width, int height)
+        public static (int x,int y,int power,int gridSize) FindLargestSubgrid(int[,] grid, int subgridSize, int width, int height)
         {
-            var maxSubgrid = Enumerable.Range(0, width - 2)
-                .SelectMany(x => Enumerable.Range(0, height - 2).Select(y => (x, y)))
+            var maxSubgrid = Enumerable.Range(0, width - subgridSize + 1)
+                .SelectMany(x => Enumerable.Range(0, height - subgridSize + 1).Select(y => (x, y)))
                 .Select(c => new
                 {
                     Coord = c,
-                    Power = grid[c.x, c.y] + grid[c.x + 1, c.y] + grid[c.x + 2, c.y] +
-                grid[c.x, c.y + 1] + grid[c.x + 1, c.y + 1] + grid[c.x + 2, c.y + 1] +
-                grid[c.x, c.y + 2] + grid[c.x + 1, c.y + 2] + grid[c.x + 2, c.y + 2]
-                }).MaxBy(s => s.Power).Single();
-            return (maxSubgrid.Coord.x + 1, maxSubgrid.Coord.y + 1);
+                    Power = Enumerable.Range(0,subgridSize).SelectMany(dx => Enumerable.Range(0,subgridSize).Select(dy => (dx,dy)))
+                        .Sum(q => grid[c.x + q.dx, c.y + q.dy])
+                }).MaxBy(s => s.Power).First(); // for part 2 there can be shared maximums at various grid sizes
+            return (maxSubgrid.Coord.x + 1, maxSubgrid.Coord.y + 1, maxSubgrid.Power, subgridSize);
         }
 
         public static int[,] CreateGrid(int width, int height, int gridSerialNumber)
@@ -47,9 +46,15 @@ namespace Solvers
             return powerLevel % 10 - 5;
         }
 
-        public static int Part2Solver(string[] input)
+        public static string Part2Solver(string[] input)
         {
-            throw new InvalidOperationException();
+            var serialNumber = int.Parse(input[0]);
+            var grid = CreateGrid(300, 300, serialNumber);
+            var (x,y,_,size) = Enumerable.Range(1, 300)
+                .Select(g => FindLargestSubgrid(grid, g, 300, 300))
+                .MaxBy(q => q.power)
+                .Single();
+            return $"{x},{y},{size}";
         }
     }
 }
