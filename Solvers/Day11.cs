@@ -1,11 +1,10 @@
 ﻿using MoreLinq;
-using System;
 using System.Linq;
 
 namespace Solvers
 {
     public static class Day11
-    {    
+    {
         public static string Part1Solver(string[] input)
         {
             var serialNumber = int.Parse(input[0]);
