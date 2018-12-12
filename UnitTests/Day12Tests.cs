@@ -89,7 +89,7 @@ namespace Tests
         {
             var result = Day12.Part1Solver(Helpers.GetInputLines(12));
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(2995, result);
         }
 
 
