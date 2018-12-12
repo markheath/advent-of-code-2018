@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Solvers;
-using System;
 using System.Linq;
 
 namespace Tests
@@ -92,6 +91,12 @@ namespace Tests
             Assert.AreEqual(2995, result);
         }
 
+        [Test]
+        public void Part2Solution()
+        {
+            var result = Day12.Part2Solver(Helpers.GetInputLines(12));
+            Assert.AreEqual(3650000000377, result);
+        }
 
     }
 }
