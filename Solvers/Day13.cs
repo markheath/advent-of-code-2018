@@ -24,6 +24,42 @@ namespace Solvers
             }
         }
 
+
+        public static string Part2Solver(string[] input)
+        {
+            var carts = GetCarts(input);
+            for (int tick = 0; true; tick++)
+            {
+                var hadCollision = false;
+                foreach (var cart in carts.OrderBy(c => c.Y).ThenBy(c => c.X))
+                {
+                    if (!cart.Collided)
+                    {
+                        cart.Move(input);
+                        foreach (var collision in carts.Where(c => c != cart && c.X == cart.X && c.Y == cart.Y))
+                        {
+                            cart.Collided = true;
+                            collision.Collided = true;
+                            hadCollision = true;
+                            break;
+                        }
+                    }
+                }
+                if (hadCollision)
+                {
+                    carts = carts.Where(c => !c.Collided).ToList();
+                    if (carts.Count == 1)
+                    {
+                        return $"{carts[0].X},{carts[0].Y}";
+                    }
+                    if (carts.Count == 0)
+                    {
+                        throw new Exception("No carts left!");
+                    }
+                }
+            }
+        }
+
         private static IList<CartState> GetCarts(string[] map)
         {
             var carts = new List<CartState>();
@@ -49,6 +85,8 @@ namespace Solvers
             public int Y { get; private set; }
             public char Dir { get; private set; } // < > v ^
             public int Intersections { get; private set; }
+            public bool Collided { get; set; }
+
             public void Move(string[] map)
             {
                 char newPos;

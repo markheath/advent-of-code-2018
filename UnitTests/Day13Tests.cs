@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Solvers;
-using System.Linq;
 
 namespace Tests
 {
@@ -12,7 +11,15 @@ namespace Tests
 | | |  | v  |
 \-+-/  \-+--/
   \------/   ";
-        
+
+        private const string testData2 = @"/>-<\  
+|   |  
+| /<+-\
+| | | v
+\>+</ |
+  |   ^
+  \<->/";
+
         [Test]
         public void Part1TestData()
         {
@@ -29,5 +36,20 @@ namespace Tests
             Assert.AreEqual("130,104", collision);
         }
 
+        [Test]
+        public void Part2TestData()
+        {
+            var collision = Day13.Part2Solver(testData2.Split("\r\n"));
+
+            Assert.AreEqual("6,4", collision);
+        }
+
+        [Test]
+        public void Part2Solution()
+        {
+            var collision = Day13.Part2Solver(Helpers.GetInputLines(13));
+
+            Assert.AreEqual("29,83", collision);
+        }
     }
 }
