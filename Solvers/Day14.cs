@@ -29,9 +29,45 @@ namespace Solvers
             return recipes.Skip(numberOfRecipes).Take(10).ToDelimitedString("");
         }
 
-        public static string Part2Solver(string[] input)
+        public static int Part2Solver(string search)
         {
-            throw new NotImplementedException();
+            var searchNums = search.Select(c => c - '0').ToArray();
+            var elfPos = new[] { 0, 1 };
+            var recipes = new List<int>() { 3, 7 };
+            for (int steps = 1; true; steps++)
+            {
+                var newRecipe = recipes[elfPos[0]] + recipes[elfPos[1]];
+                if (newRecipe < 10)
+                {
+                    recipes.Add(newRecipe);
+                }
+                else
+                {
+                    recipes.Add(newRecipe / 10);
+                    if (Matches(recipes, searchNums))
+                    {
+                        return recipes.Count - searchNums.Length;
+                    }
+                    recipes.Add(newRecipe % 10);
+                }
+                if (Matches(recipes, searchNums))
+                {
+                    return recipes.Count - searchNums.Length;
+                }
+
+                elfPos[0] = (elfPos[0] + 1 + recipes[elfPos[0]]) % recipes.Count;
+                elfPos[1] = (elfPos[1] + 1 + recipes[elfPos[1]]) % recipes.Count;
+            }
+        }
+
+        private static bool Matches(List<int> recipes, int[] searchNums)
+        {
+            if (recipes.Count < searchNums.Length) return false;
+            for(int n = 0, r = recipes.Count - searchNums.Length; n < searchNums.Length; n++, r++)
+            {
+                if (recipes[r] != searchNums[n]) return false;
+            }
+            return true;
         }
     }
 }
